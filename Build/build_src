@@ -1,0 +1,83 @@
+#!/bin/bash -e
+#
+# $Header: //depot/Software/IzoT/Dev/Build/build_src#5 $
+#
+# Build IzoT SDK Source Projects
+#
+#   usage:  build_src [targets]
+#
+#   where:  targets = make target(s) to build (e.g. clean, all) (default: "clean all")
+#
+# Copyright (c) 2013-2014 Echelon Corporation.  All rights reserved.
+# 
+# Use of this code is subject to your compliance with the terms of the
+# Echelon IzoT(tm) Software Developer's Kit License Agreement which is
+# available at www.echelon.com/license/izot_sdk/.
+#
+
+# display an error message on sub-command failure (for use with bash -e)
+trap 'echo -e "\nERROR: Build failed! ($?)" >&2' ERR
+
+# pipelines will fail if any command fails
+set -o pipefail
+
+
+# function to indent build output
+indent() { sed -ue 's/^/  /'; }
+
+
+# start out in the IzoT SDK build root
+cd "$(dirname $0)/.."
+
+
+# NOTE: The Debian packaged toolchain does not produce binary code
+#       usable on the Raspberry Pi (Raspbian).
+#       The Raspbian toolchain must be used instead.
+
+# check for/install missing packages, if any
+hash arm-linux-gnueabihf-gcc 2>&- || { echo "ARM cross-compiler tools not installed!" >&2; exit 1; }
+
+
+# Configurations to build.  Default is 'Release' only.
+# Can be overridden by setting 'CONFIGS' environment variable.
+#CONFIGS=${CONFIGS:-Debug Release DebugNative ReleaseNative}
+CONFIGS=${CONFIGS:-Release}
+
+# Target(s) to build.  Default is "clean all".
+# Can be overridden by passing targets on command line.
+TARGETS=${*:-clean all}
+
+# source directories of projects to build
+PROJECT_DIRS="LonTalkStack/Source ISI/isi.lib.c LonBridge/dev RNI"
+
+
+# build specified projects
+for dir in $PROJECT_DIRS
+do
+    echo "Building project in '$dir'..."
+
+    # build specified configurations (in sub-shell)
+    for cfg in $CONFIGS
+    do
+        (
+            cd "$dir/$cfg"
+            echo "Building configuration '$cfg'..."
+                make $TARGETS |& indent
+            echo
+        ) |& indent
+    done
+    echo
+done
+
+
+# make shared library 'alias' symlinks
+(
+    cd "SDK/lib"
+    echo "Building shared library 'alias' symlinks..."
+        ./mklinks |& indent
+    echo
+)
+
+
+# That's all folks!
+exit 0

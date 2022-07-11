@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShortStackWizard ServicePinHeldNotification="TRUE" UseExplicitProgramID="TRUE" UseVerboseComments="FALSE" WantExplicitAddressing="FALSE" WantApplicationMessages="FALSE" IncludeExtApi="FALSE" IncludeUpdateApi="FALSE" IncludeIsi="FALSE" FawOverridden="FALSE" ShowAll="TRUE" UsOp="FALSE">
+	<Contents MajorVersion="0" MinorVersion="0" CreationDate="1352408869" Format="1" Content="2">
+		<FileDescription>Settings for LonTalk Interface Developer project</FileDescription>
+	</Contents>
+	<ServicePinNotificationDelay>10</ServicePinNotificationDelay>
+	<MicroServer>FT 3120 Smart Transceiver</MicroServer>
+	<Transceiver>TP/FT-10</Transceiver>
+	<ProgramID>9F:FF:FF:06:00:0A:04:11</ProgramID>
+	<NcModel>Simple Example.nc</NcModel>
+	<IncludeSearchPath></IncludeSearchPath>
+	<Defines></Defines>
+	<TargetLanguage></TargetLanguage>
+	<Clock>20 MHz</Clock>
+	<ClockFactor>1.000000</ClockFactor>
+	<FawOverrideStart>0</FawOverrideStart>
+	<FawOverrideSize>0</FawOverrideSize>
+	<Target></Target>
+	<Verbosity>0</Verbosity>
+	<ftxl-buffer-ai>5</ftxl-buffer-ai>
+	<ftxl-buffer-ao>3</ftxl-buffer-ao>
+	<ftxl-buffer-aop>2</ftxl-buffer-aop>
+	<ftxl-buffer-ll>5</ftxl-buffer-ll>
+	<ftxl-buffer-nis>66</ftxl-buffer-nis>
+	<ftxl-buffer-nos>66</ftxl-buffer-nos>
+	<ftxl-buffer-ni>11</ftxl-buffer-ni>
+	<ftxl-buffer-no>3</ftxl-buffer-no>
+	<ftxl-buffer-nop>3</ftxl-buffer-nop>
+	<ftxl-domains>2</ftxl-domains>
+	<ftxl-addresses>15</ftxl-addresses>
+	<ftxl-aliases>5</ftxl-aliases>
+	<ftxl-dynamic-nvs>0</ftxl-dynamic-nvs>
+	<ftxl-nvd-flush-timeout>1</ftxl-nvd-flush-timeout>
+	<ftxl-nvd-model>0</ftxl-nvd-model>
+	<ftx-nvd-root>.</ftx-nvd-root>
+	<ftxl-receive-transactions>20</ftxl-receive-transactions>
+	<ftxl-transmit-transactions>15</ftxl-transmit-transactions>
+	<ftxl-transmit-ttl>24576</ftxl-transmit-ttl>
+	<ftxl-auto-flags>0</ftxl-auto-flags>
+	<ftxl-avg-dynsdsize>16</ftxl-avg-dynsdsize>
+</ShortStackWizard>

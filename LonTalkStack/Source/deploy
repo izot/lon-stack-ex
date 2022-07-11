@@ -1,0 +1,95 @@
+#!/bin/sh
+#
+# Script to deploy and (optionally) install a target file to
+# a local and remote location (via RSYNC).
+#
+# Typically used by adding the following command to a project configuration's
+# post-build script:
+#
+#   ${ProjDirPath}/deploy -i ${BuildArtifactFileBaseName}.${BuildArtifactFileExt}
+#
+#   where [opts] can include '-i' (install target).
+#   
+# NOTE: For remote deployment (optional), user must specify the hostname and
+#       directory relative to their home directory on the remote host)
+#       in the file $HOME/.target-remote (on the local host).
+#       For local deployment (optional), user must create an (empty) file in
+#       $HOME/.target-local.
+#
+# Use of this code is subject to your compliance with the terms of the
+# Echelon IzoT(tm) Software Developer's Kit License Agreement which is
+# available at www.echelon.com/license/izot_sdk/.
+#
+
+__version__="$Revision: #4 $"
+# $File: //depot/Software/IzoT/Dev/LonTalkStack/Source/deploy $
+
+# check command usage
+install=
+if [ "$1" = "-i" ]; then
+    install=1
+    shift
+fi
+if [ -z "$1" ]; then
+    echo "usage: ${0##.*/} [-i] <file>" >&2
+    exit 1
+fi
+
+# verify specified file exists
+if [ ! -f "$1" ]; then
+    echo $1: file not found! >&2
+    exit 2
+fi
+
+
+# create symlinks for shared libraries
+links=
+file=$1
+is_so=
+echo "$file" | grep -q .so - && is_so=1
+while [ -n $is_so -a "${file##*.}" != "so" ]; do
+    link="${file%.*}"
+    echo "creating symlink: $link -> $file"
+    ln -s -f "$file" "$link"
+    links="$links$link "
+    file="$link"
+done
+
+
+# optionally deploy target(s)
+if [ -n "$install" ]; then
+    # check for local deployment
+    test -f "$HOME/.target-local" && TARGET_LOCAL=1
+    
+    # check whether to deploy file locally or not
+    if [ -z "$TARGET_LOCAL" ]; then
+        # explain how to deploy file(s)
+        echo "(to deploy '$1' locally, create an (empty) file '$HOME/.target-local')"
+    else
+        # deploy file(s) locally - note: makes copies of symlinks
+        TARGET=../../../SDK/lib
+        echo "Deploying target '$1' (from '$PWD') locally..."
+        mkdir -p "$TARGET"
+        rsync -l "$1" $links "$TARGET" || { echo "Failed to deploy file(s) locally!" >&2; exit 3; }
+        echo OK
+    fi
+    
+    
+    # read target hostname, if set
+    test -f "$HOME/.target-remote" && TARGET_REMOTE=`cat "$HOME/.target-remote"`
+    
+    # check whether to deploy file remotely or not
+    if [ -z "$TARGET_REMOTE" ]; then
+        # explain how to deploy file(s)
+        echo "(to deploy '$1' to a remote host, set the remote hostname:path in '$HOME/.target-remote')"
+    else
+        # deploy file(s) - note: makes copies of symlinks
+        echo "Deploying target '$1' (from '$PWD') to '$TARGET_REMOTE'..."
+        rsync -l "$1" $links "$TARGET_REMOTE" || { echo "Failed to copy file(s) to remote host!" >&2; exit 4; }
+        echo OK
+    fi
+fi
+
+
+# That's all Folks!
+exit 0;

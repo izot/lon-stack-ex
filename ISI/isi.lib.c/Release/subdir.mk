@@ -1,0 +1,362 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../isiVectorHandlers.cpp 
+
+C_SRCS += \
+../APPRDAS.c \
+../APPROVE.c \
+../ASSEMBLY.c \
+../AcceptE.c \
+../AcqDev.c \
+../AcqDom.c \
+../ApprCsmo.c \
+../AutoEnro.c \
+../CancelA.c \
+../CancelE.c \
+../Cid.c \
+../ClrConn.c \
+../CondDiag.c \
+../ConnTab.c \
+../CreateE.c \
+../Csmi.c \
+../Csmo.c \
+../CtrlEnrollment.c \
+../DIDS.c \
+../DefaultCallback.c \
+../DeleteE.c \
+../Did.c \
+../EXTENDE.c \
+../EstOverr.c \
+../EstRead.c \
+../FETCH.c \
+../FNDLOCNV.c \
+../FactDflt.c \
+../GRPOK.c \
+../HaveBdAl.c \
+../Host.c \
+../IMPLEMNT.c \
+../InSelRng.c \
+../IsBeHost.c \
+../IsCfg.c \
+../IsConn.c \
+../IssuNvHb.c \
+../LeaveE.c \
+../MakeE.c \
+../Msg.c \
+../MsgDa.c \
+../MsgDas.c \
+../MsgS.c \
+../NextConn.c \
+../Node.c \
+../NvIdx.c \
+../NvValue.c \
+../NxNvIdx.c \
+../NxtAssby.c \
+../OpenE.c \
+../PROCRESP.c \
+../Period.c \
+../Periodic.c \
+../Persistence.c \
+../PrimGrp.c \
+../QryNvHb.c \
+../RCVCSMD.c \
+../RCVCSME.c \
+../RCVCSMO.c \
+../RCVDRUMA.c \
+../RMCONN.c \
+../RMCONN2.c \
+../RSNDCSMO.c \
+../RcvCsmc.c \
+../RcvCsmi.c \
+../RcvCsmx.c \
+../RcvDrumS.c \
+../RcvTimgS.c \
+../ReplSel.c \
+../RptCnt.c \
+../Running.c \
+../SNDCSMX.c \
+../SNDTIMG.c \
+../Selctrs.c \
+../SendMsg.c \
+../SendNvHb.c \
+../SetDom.c \
+../Slot.c \
+../SndCsme.c \
+../SndCsmex.c \
+../SndCsmi.c \
+../SndCsmr.c \
+../SndDrum.c \
+../SndPCsm.c \
+../StartDas.c \
+../Subnet.c \
+../SweepAdr.c \
+../TICKDAS.c \
+../Tcsmr.c \
+../TickDa.c \
+../UpdDiag.c \
+../Width.c \
+../XmiProps.c \
+../impver.c \
+../init.c \
+../protver.c \
+../rand.c \
+../send.c \
+../snddidrm.c \
+../start.c \
+../startda.c \
+../starts.c \
+../stop.c \
+../tick.c \
+../ticks.c \
+../trace.c \
+../updateUI.c \
+../util.c \
+../vars.c 
+
+OBJS += \
+./APPRDAS.o \
+./APPROVE.o \
+./ASSEMBLY.o \
+./AcceptE.o \
+./AcqDev.o \
+./AcqDom.o \
+./ApprCsmo.o \
+./AutoEnro.o \
+./CancelA.o \
+./CancelE.o \
+./Cid.o \
+./ClrConn.o \
+./CondDiag.o \
+./ConnTab.o \
+./CreateE.o \
+./Csmi.o \
+./Csmo.o \
+./CtrlEnrollment.o \
+./DIDS.o \
+./DefaultCallback.o \
+./DeleteE.o \
+./Did.o \
+./EXTENDE.o \
+./EstOverr.o \
+./EstRead.o \
+./FETCH.o \
+./FNDLOCNV.o \
+./FactDflt.o \
+./GRPOK.o \
+./HaveBdAl.o \
+./Host.o \
+./IMPLEMNT.o \
+./InSelRng.o \
+./IsBeHost.o \
+./IsCfg.o \
+./IsConn.o \
+./IssuNvHb.o \
+./LeaveE.o \
+./MakeE.o \
+./Msg.o \
+./MsgDa.o \
+./MsgDas.o \
+./MsgS.o \
+./NextConn.o \
+./Node.o \
+./NvIdx.o \
+./NvValue.o \
+./NxNvIdx.o \
+./NxtAssby.o \
+./OpenE.o \
+./PROCRESP.o \
+./Period.o \
+./Periodic.o \
+./Persistence.o \
+./PrimGrp.o \
+./QryNvHb.o \
+./RCVCSMD.o \
+./RCVCSME.o \
+./RCVCSMO.o \
+./RCVDRUMA.o \
+./RMCONN.o \
+./RMCONN2.o \
+./RSNDCSMO.o \
+./RcvCsmc.o \
+./RcvCsmi.o \
+./RcvCsmx.o \
+./RcvDrumS.o \
+./RcvTimgS.o \
+./ReplSel.o \
+./RptCnt.o \
+./Running.o \
+./SNDCSMX.o \
+./SNDTIMG.o \
+./Selctrs.o \
+./SendMsg.o \
+./SendNvHb.o \
+./SetDom.o \
+./Slot.o \
+./SndCsme.o \
+./SndCsmex.o \
+./SndCsmi.o \
+./SndCsmr.o \
+./SndDrum.o \
+./SndPCsm.o \
+./StartDas.o \
+./Subnet.o \
+./SweepAdr.o \
+./TICKDAS.o \
+./Tcsmr.o \
+./TickDa.o \
+./UpdDiag.o \
+./Width.o \
+./XmiProps.o \
+./impver.o \
+./init.o \
+./isiVectorHandlers.o \
+./protver.o \
+./rand.o \
+./send.o \
+./snddidrm.o \
+./start.o \
+./startda.o \
+./starts.o \
+./stop.o \
+./tick.o \
+./ticks.o \
+./trace.o \
+./updateUI.o \
+./util.o \
+./vars.o 
+
+C_DEPS += \
+./APPRDAS.d \
+./APPROVE.d \
+./ASSEMBLY.d \
+./AcceptE.d \
+./AcqDev.d \
+./AcqDom.d \
+./ApprCsmo.d \
+./AutoEnro.d \
+./CancelA.d \
+./CancelE.d \
+./Cid.d \
+./ClrConn.d \
+./CondDiag.d \
+./ConnTab.d \
+./CreateE.d \
+./Csmi.d \
+./Csmo.d \
+./CtrlEnrollment.d \
+./DIDS.d \
+./DefaultCallback.d \
+./DeleteE.d \
+./Did.d \
+./EXTENDE.d \
+./EstOverr.d \
+./EstRead.d \
+./FETCH.d \
+./FNDLOCNV.d \
+./FactDflt.d \
+./GRPOK.d \
+./HaveBdAl.d \
+./Host.d \
+./IMPLEMNT.d \
+./InSelRng.d \
+./IsBeHost.d \
+./IsCfg.d \
+./IsConn.d \
+./IssuNvHb.d \
+./LeaveE.d \
+./MakeE.d \
+./Msg.d \
+./MsgDa.d \
+./MsgDas.d \
+./MsgS.d \
+./NextConn.d \
+./Node.d \
+./NvIdx.d \
+./NvValue.d \
+./NxNvIdx.d \
+./NxtAssby.d \
+./OpenE.d \
+./PROCRESP.d \
+./Period.d \
+./Periodic.d \
+./Persistence.d \
+./PrimGrp.d \
+./QryNvHb.d \
+./RCVCSMD.d \
+./RCVCSME.d \
+./RCVCSMO.d \
+./RCVDRUMA.d \
+./RMCONN.d \
+./RMCONN2.d \
+./RSNDCSMO.d \
+./RcvCsmc.d \
+./RcvCsmi.d \
+./RcvCsmx.d \
+./RcvDrumS.d \
+./RcvTimgS.d \
+./ReplSel.d \
+./RptCnt.d \
+./Running.d \
+./SNDCSMX.d \
+./SNDTIMG.d \
+./Selctrs.d \
+./SendMsg.d \
+./SendNvHb.d \
+./SetDom.d \
+./Slot.d \
+./SndCsme.d \
+./SndCsmex.d \
+./SndCsmi.d \
+./SndCsmr.d \
+./SndDrum.d \
+./SndPCsm.d \
+./StartDas.d \
+./Subnet.d \
+./SweepAdr.d \
+./TICKDAS.d \
+./Tcsmr.d \
+./TickDa.d \
+./UpdDiag.d \
+./Width.d \
+./XmiProps.d \
+./impver.d \
+./init.d \
+./protver.d \
+./rand.d \
+./send.d \
+./snddidrm.d \
+./start.d \
+./startda.d \
+./starts.d \
+./stop.d \
+./tick.d \
+./ticks.d \
+./trace.d \
+./updateUI.d \
+./util.d \
+./vars.d 
+
+CPP_DEPS += \
+./isiVectorHandlers.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: ../%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross GCC Compiler'
+	arm-linux-gnueabihf-gcc -DIZOT_PLATFORM -DNDEBUG -I../../../LonTalkStack/Source -I../../../LonTalkStack/Source/FtxlApi/include -I../../../LonTalkStack/Source/LonLinkIzoT/include -I../../../LonTalkStack/Source/Shared/include -I../../../LonTalkStack/Source/ShareIp/include -I../../../LonTalkStack/Source/Stack/include -I../../../LonTalkStack/Templates -O3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+%.o: ../%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross G++ Compiler'
+	arm-linux-gnueabihf-g++ -DIZOT_PLATFORM -DNDEBUG -I../../../LonTalkStack/Source -I../../../LonTalkStack/Source/FtxlApi/include -I../../../LonTalkStack/Source/LonLinkIzoT/include -I../../../LonTalkStack/Source/Shared/include -I../../../LonTalkStack/Source/ShareIp/include -I../../../LonTalkStack/Source/Stack/include -I../../../LonTalkStack/Templates -O3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

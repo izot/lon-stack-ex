@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleLtDevice", "SimpleLtDevice\SimpleLtDevice.vcproj", "{57115499-E416-4C5E-9800-62B9C1F764FC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ip852Router", "Ip852Router\Ip852Router.vcproj", "{6B758AAF-9D70-4F8E-84E0-7AB3F6748152}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleDeviceIzoT", "SimpleDeviceIzoT\SimpleDeviceIzoT.vcproj", "{DBEDFF72-7FBF-4E7F-9151-F4B4F7302924}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57115499-E416-4C5E-9800-62B9C1F764FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{57115499-E416-4C5E-9800-62B9C1F764FC}.Debug|Win32.Build.0 = Debug|Win32
+		{57115499-E416-4C5E-9800-62B9C1F764FC}.Release|Win32.ActiveCfg = Release|Win32
+		{57115499-E416-4C5E-9800-62B9C1F764FC}.Release|Win32.Build.0 = Release|Win32
+		{6B758AAF-9D70-4F8E-84E0-7AB3F6748152}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6B758AAF-9D70-4F8E-84E0-7AB3F6748152}.Debug|Win32.Build.0 = Debug|Win32
+		{6B758AAF-9D70-4F8E-84E0-7AB3F6748152}.Release|Win32.ActiveCfg = Release|Win32
+		{6B758AAF-9D70-4F8E-84E0-7AB3F6748152}.Release|Win32.Build.0 = Release|Win32
+		{DBEDFF72-7FBF-4E7F-9151-F4B4F7302924}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DBEDFF72-7FBF-4E7F-9151-F4B4F7302924}.Debug|Win32.Build.0 = Debug|Win32
+		{DBEDFF72-7FBF-4E7F-9151-F4B4F7302924}.Release|Win32.ActiveCfg = Release|Win32
+		{DBEDFF72-7FBF-4E7F-9151-F4B4F7302924}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

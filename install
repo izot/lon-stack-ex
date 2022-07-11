@@ -1,0 +1,175 @@
+#!/bin/bash -e
+#
+# Install IzoT SDK Packages
+#
+#   usage:  install [-s|--src]
+#
+#   where:  -s --src = extract source archives (default: not extracted)
+#
+# $Header: //depot/Software/IzoT/Dev/Install/install#11 $
+#
+# Copyright (c) 2013-2014 Echelon Corporation.  All rights reserved.
+# 
+# Use of this code is subject to your compliance with the terms of the
+# Echelon IzoT(tm) Software Developer's Kit License Agreement which is
+# available at www.echelon.com/license/izot_sdk/.
+
+# display an error message on sub-command failure (for use with bash -e)
+trap 'echo -e "\nERROR: Installation failed! ($?)" >&2' ERR
+
+# pipelines will fail if any command fails (bash only)
+set -o pipefail
+
+
+# function to indent script output
+indent() { sed -ue 's/^/  /'; }
+
+
+# before starting, first verify we're not running in a virtual environment
+[[ -z $VIRTUAL_ENV ]] ||
+{
+    echo 'Please deactivate your current virtual environment'
+    echo 'by running "deactivate", and then restart this installation script.'
+    exit -1
+} >&2
+
+
+# also verify we're not running as 'sudo'
+[[ -z $SUDO_USER ]] ||
+{
+    echo 'Do not run this script using "sudo"!'
+    exit -1
+} >&2
+
+
+# start out in the packages directory
+cd "$(dirname $0)/packages"
+
+
+# parse command line options
+INSTALL_SRC=false
+case "$1" in
+    -s|--src) INSTALL_SRC=true; shift;;
+esac
+
+
+# packages present in this installer
+shopt -s nullglob
+GLOBIGNORE="*-src*"
+IZOT_SDK=(izot-sdk-*.tar.gz)
+IZOT_RTR=(izot-rtr-*.tar.gz)
+IZOT_BNR=(izot-bnr-*.tar.gz)
+unset GLOBIGNORE
+IZOT_SDK_SRC=(izot-sdk-*-src-*.tar.gz)
+IZOT_RTR_SRC=(izot-rtr-*-src.tar.gz)
+
+
+# additional SDK installation arguments
+IZOT_SDK_ARGS=""
+
+
+# IzoT Router and (optionally) BACnet Router
+RTR_TMP_DIR="izot-rtr-$$"
+[[ -f $IZOT_BNR ]] && {
+    echo "Unpacking BACnet Router..."
+    {
+        # create temporary folder and unpack BACnet Router package
+        mkdir -p "$RTR_TMP_DIR"
+        tar --extract --directory "$RTR_TMP_DIR" --file "$IZOT_BNR" --verbose --preserve-permissions
+    } |& indent
+    echo
+}
+
+[[ -f $IZOT_RTR ]] && {
+    echo "Unpacking IzoT Router..."
+    {
+        # create temporary folder and unpack IzoT Router package
+        # overlayed on top of BACnet Router, if present
+        mkdir -p "$RTR_TMP_DIR"
+        tar --extract --directory "$RTR_TMP_DIR" --file "$IZOT_RTR" --verbose --preserve-permissions
+    } |& indent
+    echo
+
+    # extract IzoT Router version number
+    IZOT_RTR_VER=$(< "$RTR_TMP_DIR/usr/lib/izot/router_version")
+
+    # check whether this kernel is supported as an IzoT Router
+    if [[ -d "$RTR_TMP_DIR/lib/modules/$(uname -r)" ]]; then
+        # install the IzoT Router package(s)
+        echo "Installing IzoT Router $IZOT_RTR_VER packages..."
+        (
+            cd "$RTR_TMP_DIR"
+            sudo ./install
+        ) |& indent
+
+        # IzoT Router upgrades system packages, so no need for SDK to do the same
+        IZOT_SDK_ARGS="--skip-upgrades"
+    else
+    (
+        echo "Skipping installation of IzoT Router $IZOT_RTR_VER."
+        echo "Kernel version '$(uname -r)'' is not supported."
+        echo "Kernel version(s) supported:"
+        cd "$RTR_TMP_DIR/lib/modules" && echo */ | tr -d / |& indent
+    ) >&2
+    fi
+    echo
+}
+
+# remove temporary folder, if any
+rm -rf "$RTR_TMP_DIR"
+
+
+# IzoT SDK
+: ${IZOT:=~/izot-sdk}
+echo "IZOT = $IZOT"
+[[ -f $IZOT_SDK ]] && (
+    echo "Unpacking IzoT SDK..."
+    {
+        # create IzoT SDK directory (or use currently installed installation directory)
+        mkdir -p "$IZOT"
+        tar --extract --directory "$IZOT" --file "$IZOT_SDK" --verbose
+        cp -vf ../{README,CHANGES,LICENSE}.md "$IZOT"
+    } |& indent
+    echo
+
+    cd "$IZOT"
+
+    # extract IzoT SDK version number
+    Q="['\"]"
+    NQ="[^'\"]"
+    IZOT_SDK_VER=$(sed -ne "s/^[^#]*VERSION.*=$NQ*$Q\($NQ*\)$Q.*/\1/p" "izot/version.py")
+
+    # install/upgrade (bootstrap) the IzoT SDK packages
+    echo "Installing IzoT SDK $IZOT_SDK_VER packages..."
+    etc/bootstrap $IZOT_SDK_ARGS |& indent
+    echo
+)
+
+
+# optionally extract source archives
+$INSTALL_SRC && {
+    # IzoT Router Source
+    [[ -f $IZOT_RTR_SRC ]] && {
+        echo "Copying IzoT Router source archive to '$HOME/$(basename IZOT_RTR_SRC)'..."
+        {
+            cp -f "$IZOT_RTR_SRC" ~
+        } |& indent
+        echo
+    }
+
+
+    # IzoT SDK Source
+    [[ -f $IZOT_SDK_SRC ]] && {
+        echo "Copying IzoT SDK source archive to '$IZOT/src/$(basename IZOT_SDK_SRC)'..."
+        {
+            mkdir -p "$IZOT/src"
+            cp -f "$IZOT_SDK_SRC" "$IZOT/src"
+        } |& indent
+        echo
+    }
+}
+
+
+# That's all folks!
+echo "IzoT packages successfully installed."
+exit 0
