@@ -11,7 +11,7 @@ This document covers the following topics:
 
 # Overview #
 
-The Dialog LON Stack EX enables developers to build networks of communicating devices for the Industrial Internet of Things. The LON protocol is an open standard defined by the ISO/IEC 14908 series of standards.
+The EnOcean LON Stack EX enables developers to build networks of communicating devices for the Industrial Internet of Things. The LON protocol is an open standard defined by the ISO/IEC 14908 series of standards.
 
 The EX stack enables Industrial IoT developers to build networks of communicating devices using any processor supporting the C or Python 3 programming language. Devices with the EX stack can exchange data with other LON devices using an easy-to-use publish-subscribe data model over IP or native LON channels. LON devices can collect data from physical sensors built to monitor the built environment including temperature, humidity, light-level, power-consumption, or moisture, and make the data available to other LON devices in the same network. Using data received from other LON devices or local sensors, LON devices can also control physical actuators such as LED dimmers, motor controllers, damper controllers, and solenoids. The LON protocol is an open standard defined by the ISO/IEC 14908 series of standards.
 
